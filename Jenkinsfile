@@ -6,8 +6,8 @@ pipeline {
     environment {
         PIP_BREAK_SYSTEM_PACKAGES = 1
         scannerHome = tool 'SonarQube'
-        dockerRegistry = ''
-        registryCredentials = 'dockerhub'
+        dockerRegistry = ""
+        registryCredentials = "dockerhub"
         imageName = "evilseequsys/backend"
     }
 
@@ -55,7 +55,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("http://${dockerRegistry}", "$registryCredentials") {
+                    docker.withRegistry("${dockerRegistry}", "$registryCredentials") {
                         sh "docker push ${imageName}:${dockerTag}"
                         sh "docker push ${imageName}:latest"
                     }
